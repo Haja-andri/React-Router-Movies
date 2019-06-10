@@ -15,6 +15,12 @@ body {
   position: relative;
   margin: 1rem auto;
 }
+.movie-list a {
+  text-decoration: none;
+}
+.movie-list a:active, .movie-list a:hover, .movie-list a:visited {
+  color: black;
+}
 
 .movie-director {
   padding: 4px 0;
@@ -39,6 +45,13 @@ body {
 .saved-list h3 {
   margin-right: 10px;
 }
+.saved-list a {
+  color: black;
+  text-decoration: none;
+}
+.saved-list a:hover {
+  text-decoration: underline;
+}
 
 .saved-movie {
   margin: 0 10px;
@@ -60,13 +73,23 @@ body {
   border: 1px solid grey;
   padding: 5px 10px;
   background-color: lightseagreen;
+  cursor: pointer;
 }
+
 .save-button:hover {
   background-color: green;
   color: white;
 }
 
+.save-button:disabled, .save-button[disabled]  {
+  background: #ccc;
+  cursor: not-allowed;
+  color: black;
+}
+
 .home-button {
   padding: 5px 10px;
   background-color: lightskyblue;
+  width: 150px;
+  text-align: center;
 }

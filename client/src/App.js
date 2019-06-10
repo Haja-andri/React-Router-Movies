@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-
+import {BrowserRouter as Router, Route} from 'react-router-dom'
 import SavedList from './Movies/SavedList';
 import MovieList from './Movies/MovieList';
 import Movie from './Movies/Movie';
-import { BrowserRouter as Router } from 'react-router-dom'
+
 
 export default class App extends Component {
   constructor() {
@@ -13,20 +13,34 @@ export default class App extends Component {
     };
   }
 
+  checkMovie = (movie) => {
+    let alreadyThere = false;
+    this.state.savedList.forEach(mov => {
+      if(mov.id === movie.id){
+        alreadyThere = true;
+      }
+    })
+    return alreadyThere;
+  }
+
   addToSavedList = movie => {
     const savedList = this.state.savedList;
-    savedList.push(movie);
+    if(!this.checkMovie(movie)) {
+      savedList.push(movie);
+    }
     this.setState({ savedList });
   };
-
+ 
   render() {
     return (
-      <Router>
-        <div>
+      <div>
+        <Router>
           <SavedList list={this.state.savedList} />
-          <div>Replace this Div with your Routes</div>
-        </div>
-      </Router>
+          <Route path="/" exact component={MovieList} />
+          <Route path={'/movies/:id'}  render={ (props) => <Movie addToSavedList={this.addToSavedList} {...props} />} />
+          
+        </Router>
+      </div>
     );
   }
 }
